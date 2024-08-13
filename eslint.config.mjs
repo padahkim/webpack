@@ -9,4 +9,37 @@ export default [
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
   pluginReact.configs.flat.recommended,
+  {
+    rules: {
+      "import/order": [
+        "error",
+        {
+          groups: [
+            "builtin",
+            "external",
+            "internal",
+            ["parent", "sibling"],
+            "index",
+            "unknown",
+          ],
+          pathGroups: [
+            {
+              pattern: "react*,react*/**",
+              group: "external",
+              position: "before",
+            },
+            {
+              pattern: "@Components/**/*",
+              group: "internal",
+              position: "after",
+            },
+          ],
+          "newlines-between": "always",
+          alphabetize: {
+            order: "asc",
+          },
+        },
+      ],
+    },
+  },
 ];
