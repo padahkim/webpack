@@ -10,6 +10,7 @@ module.exports = () => {
       filename: "bundle.js",
       path: path.resolve(__dirname, "dist"),
       clean: true,
+      publicPath: "/",
     },
     resolve: {
       extensions: [".ts", ".tsx", ".js", ".jsx"],
@@ -18,6 +19,7 @@ module.exports = () => {
       },
     },
     devServer: {
+      historyApiFallback: true,
       port: 3000,
       hot: true,
     },
@@ -31,6 +33,14 @@ module.exports = () => {
             configFile: path.resolve(__dirname, "tsconfig.json"),
           },
           exclude: /node_modules/,
+        },
+        {
+          test: /\.(sass|css|scss)$/,
+          use: ["style-loader", "css-loader", "sass-loader", "postcss-loader"],
+        },
+        {
+          test: /\\.(png|svg|jpg|jpeg|gif)$/i,
+          type: "asset/resource",
         },
         {
           test: /\.(js|jsx)$/,
